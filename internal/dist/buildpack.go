@@ -46,6 +46,22 @@ type BuildpackInfo struct {
 	Homepage    string    `toml:"homepage,omitempty" json:"homepage,omitempty" yaml:"homepage,omitempty"`
 	Keywords    []string  `toml:"keywords,omitempty" json:"keywords,omitempty" yaml:"keywords,omitempty"`
 	Licenses    []License `toml:"licenses,omitempty" json:"licenses,omitempty" yaml:"licenses,omitempty"`
+	Assets      []Asset   `toml:"assets,omitempty" json:"assets,omitempty" yaml:"assets,omitempty"`
+}
+
+// TODO -Dan- add this as inspection output
+type Asset struct {
+	Sha256      string                 `toml:"sha256" json:"-"`
+	Name        string                 `toml:"name" json:"name"`
+	ID          string                 `toml:"id" json:"id"`
+	Version     string                 `toml:"version" json:"version"`
+	LayerDiffID string                 `json:"layerDiffId"`
+	URI         string                 `toml:"uri" json:"uri"`
+	Licenses    []string               `toml:"licenses" json:"licenses"`
+	Description string                 `toml:"description" json:"description"`
+	Homepage    string                 `toml:"homepage" json:"homepage"`
+	Stacks      []string               `toml:"stacks" json:"stacks"`
+	Metadata    map[string]interface{} `toml:"metadata" json:"metadata"`
 }
 
 type License struct {

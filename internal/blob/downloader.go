@@ -36,7 +36,7 @@ func NewDownloader(logger logging.Logger, baseCacheDir string) *downloader { //n
 	}
 }
 
-func (d *downloader) Download(ctx context.Context, pathOrURI string) (Blob, error) {
+func (d *downloader) Download(ctx context.Context, pathOrURI string, options ...BlobOption) (Blob, error) {
 	if paths.IsURI(pathOrURI) {
 		parsedURL, err := url.Parse(pathOrURI)
 		if err != nil {
@@ -56,12 +56,12 @@ func (d *downloader) Download(ctx context.Context, pathOrURI string) (Blob, erro
 			return nil, err
 		}
 
-		return &blob{path: path}, nil
+		return NewBlob(path, options...), nil
 	}
 
 	path := d.handleFile(pathOrURI)
 
-	return &blob{path: path}, nil
+	return NewBlob(path, options...), nil
 }
 
 func (d *downloader) handleFile(path string) string {
